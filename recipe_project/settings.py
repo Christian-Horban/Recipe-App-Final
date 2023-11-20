@@ -27,7 +27,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-bia+ry5i4o@k47t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://serene-badlands-31824-e113e6ff4ad2.herokuapp.com']
+ALLOWED_HOSTS = ['https://serene-badlands-31824-e113e6ff4ad2.herokuapp.com/', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
