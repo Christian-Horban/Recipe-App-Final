@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-bia+ry5i4o@k47t^62h_dlaz&+uydd0f672ymf#1#7n+ddhob0')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://serene-badlands-31824-e113e6ff4ad2.herokuapp.com/']
+ALLOWED_HOSTS = ['https://serene-badlands-31824-e113e6ff4ad2.herokuapp.com']
 
 
 # Application definition
