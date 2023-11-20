@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Our Recipe Collection</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+        text-align: center;
+      }
+      .container {
+        margin-top: 50px; /* Adjust if more space needed */
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        color: #666;
+      }
+      .header-image {
+        width: 100%;
+        margin-bottom: 30px; /* Adds space below the image */
+      }
+      .header-image img {
+        width: 100%;
+        max-height: 500px; /* Adjust the max-height as needed */
+        object-fit: cover;
+      }
+      .nav-links {
+        margin-top: 20px;
+      }
+      .nav-links > * {
+        display: block; /* Stack elements vertically */
+        margin: 10px auto; /* Center elements */
+      }
+      .nav-button {
+        display: inline-block; /* Allows buttons to sit side-by-side */
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin: 0 10px; /* Spacing between buttons */
+        max-width: 200px; /* Maximum width of buttons */
+        box-sizing: border-box; /* Includes padding and border in the width */
+      }
+      form {
+        display: inline-block; /* Aligns elements in a line */
+        margin-bottom: 15px; /* Space below the form */
+      }
+      .logout-btn {
+        display: block; /* Isolate logout button */
+        margin-top: 20px; /* Space above logout button */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-image">
+      <img
+        src="../../static/recipes/Images/home.jpeg"
+        alt="Recipe Collection Header"
+      />
+    </div>
+    <div class="container">
+      <h1>Welcome to Our Recipe Collection!</h1>
+      <p>
+        Explore our vast collection of delicious recipes from around the world.
+      </p>
+      <div class="nav-links">
+        <!-- Overview Button -->
+        <a href="{% url 'recipe_overview' %}" class="nav-button"
+          >Recipe Overview</a
+        >
+
+        <!-- All Recipes Button -->
+        <a href="{% url 'show_all_recipes' %}" class="nav-button"
+          >View All Recipes</a
+        >
+
+        <!-- Add Recipe Button -->
+        <button id="addRecipeBtn" class="nav-button">Add Recipe</button>
+
+        <!-- Recipe Form (Initially Hidden) -->
+        <div id="recipeForm" style="display:none;">
+            <h2>Add New Recipe</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="nav-button">Save Recipe</button>
+            </form>
+        </div>
+
+        <!-- Search Form -->
+        <form action="{% url 'search_results' %}" method="get">
+          <input type="text" name="query" placeholder="Search recipes..." />
+          <select name="search_type">
+            <option value="name">Name</option>
+            <option value="ingredient">Ingredient</option>
+            <option value="cooking_time">Cooking Time</option>
+            <option value="difficulty">Difficulty</option>
+          </select>
+          <button type="submit" class="nav-button">Search</button>
+        </form>
+        <a href="{% url 'about_me' %}" class="nav-button">About Me</a>
+        <!-- Logout Link -->
+        <a href="{% url 'logout' %}" class="nav-button">Logout</a>
+      </div>
+    </div>
+
+    <!-- JavaScript to Toggle Form Visibility -->
+    <script>
+      document.getElementById('addRecipeBtn').addEventListener('click', function() {
+          var form = document.getElementById('recipeForm');
+          if (form.style.display === 'none') {
+              form.style.display = 'block';
+          } else {
+              form.style.display = 'none';
+          }
+      });
+  </script>
+
+  </body>
+</html>

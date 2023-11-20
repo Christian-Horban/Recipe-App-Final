@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Recipes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+        text-align: center;
+      }
+      .container {
+        margin-top: 50px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h1 {
+        color: #333;
+      }
+      .header-image {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      .header-image img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+      }
+      a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #007bff;
+      }
+      .recipe-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .recipe-image {
+    width: 300px;  /* Desired uniform width */
+    height: 200px; /* Desired uniform height */
+    object-fit: cover; /* This will ensure the image covers the area, cropping if necessary */
+    border-radius: 5px; /* Optional, for rounded corners */
+}
+      .nav-links {
+        margin-top: 20px;
+      }
+      .nav-button {
+        display: inline-block; /* Allows buttons to sit side-by-side */
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin: 0 10px; /* Spacing between buttons */
+        max-width: 200px; /* Maximum width of buttons */
+        box-sizing: border-box; /* Includes padding and border in the width */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-image">
+      <img
+        src="../../static/recipes/Images/home.jpeg"
+        alt="Recipe Collection Header"
+      />
+    </div>
+
+    <div class="nav-links">
+      <a href="{% url 'home' %}" class="nav-button" >Back to Home</a>
+      <!-- Logout Link -->
+      <a href="{% url 'logout' %}" class="nav-button" >Logout</a>
+    </div>
+
+    <div class="container">
+      <h1>All Recipes</h1>
+      {% for recipe in recipes %}
+      <div class="recipe-container">
+        <a href="{% url 'recipe_detail' pk=recipe.pk %}">
+          <img
+            src="{{ recipe.image.url }}"
+            alt="{{ recipe.name }} Image"
+            class="recipe-image"
+          />
+          <h2>{{ recipe.name }}</h2>
+          <p>{{ recipe.description|truncatewords:10 }}</p>
+          <p>
+            Cooking Time: {{ recipe.cooking_time }} minutes | Difficulty: {{ recipe.calculate_difficulty }}
+          </p>
+        </a>
+      </div>
+      {% empty %}
+      <p>No recipes found.</p>
+      {% endfor %}
+      <div class="nav-links">
+        <button href="{% url 'home' %}" class="nav-button" >Back to Home</button>
+        <!-- Logout Link -->
+        <button href="{% url 'logout' %}" class="nav-button" >Logout</button>
+      </div>
+    </div>
+  </body>
+</html>
